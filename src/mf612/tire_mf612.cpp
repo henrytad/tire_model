@@ -123,7 +123,7 @@ TireMF612::TireMF612(const std::map<std::string, std::string>& params)
             .LMUX = getDoubleFromMap(params, "LMUX", 1.0),
             .LMUY = getDoubleFromMap(params, "LMUY", 1.0),
             .LXAL = getDoubleFromMap(params, "LXAL", 1.0),
-            .LMUV = getDoubleFromMap(params, "LMUV", 0.0), // Should defualt to 0 unless trying to simulate slip speed with decaying friction
+            .LMUV = getDoubleFromMap(params, "LMUV", 0.0), // Should default to 0 unless trying to simulate slip speed with decaying friction
             .LKX = getDoubleFromMap(params, "LKX", 1.0),
             .LKY = getDoubleFromMap(params, "LKY", 1.0),
             .LCX = getDoubleFromMap(params, "LCX", 1.0),
@@ -218,7 +218,7 @@ TireForces TireMF612::evaluate(const TireInput& input) const {
     const double lamdaUyPrime = Au * lamdaUyStar / (1 + (Au - 1) * lamdaUyStar);
 
     //
-    // Logintudinal Force (Pure Longitudinal Slip, alpha = 0)
+    // Longitudinal Force (Pure Longitudinal Slip, alpha = 0)
     // 
 
     // 4.E13

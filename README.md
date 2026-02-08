@@ -21,7 +21,7 @@ int main() {
         // Prepare input parameters using TireInput struct
         TireInput input{
             .Fz = 5000.0,         // Vertical load (N)
-            .alpha_star = 0.1,    // Slip angle (tan(alpha) * sgn(Vcx))
+            .alpha = 0.1,         // Slip angle (tan(alpha) * sgn(Vcx))
             .kappa = 0.05,        // Longitudinal slip ratio
             .gamma = 0.0,         // Camber angle (radians)
             .Vcx = 10.0           // Contact patch center velocity in x direction (m/s)

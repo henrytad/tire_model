@@ -148,7 +148,7 @@ struct MF612ScalingFactors {
     double LMUX = 0.0;
     double LMUY = 0.0;
     double LXAL = 0.0;
-    double LMUV = 0.0; // Should defualt to 0 unless trying to simulate slip speed with decaying friction
+    double LMUV = 0.0; // Should default to 0 unless trying to simulate slip speed with decaying friction
     double LKX = 0.0;
     double LKY = 0.0;
     double LCX = 0.0;
