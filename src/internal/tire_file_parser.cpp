@@ -2,6 +2,8 @@
 #include <fstream>
 #include <stdexcept>
 #include <map>
+#include <cctype>
+#include <algorithm>
 
 using namespace tire_model::internal;
 
@@ -9,10 +11,18 @@ namespace tire_model {
 namespace internal {
 
 std::string trim(const std::string& str) {
-    size_t first = str.find_first_not_of(" \t");
-    if (first == std::string::npos) return "";
-    size_t last = str.find_last_not_of(" \t");
-    return str.substr(first, (last - first + 1));
+    // Find first non-whitespace character (handles space, tab, \r, \n, etc.)
+    auto first = std::find_if(str.begin(), str.end(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    });
+    if (first == str.end()) return "";
+    
+    // Find last non-whitespace character
+    auto last = std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
+        return !std::isspace(ch);
+    }).base();
+    
+    return std::string(first, last);
 }
 
 std::optional<std::pair<std::string, std::string>> parseParameterLineString(const std::string& line) {

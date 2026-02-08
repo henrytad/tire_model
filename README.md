@@ -21,7 +21,7 @@ int main() {
         // Prepare input parameters using TireInput struct
         TireInput input{
             .Fz = 5000.0,         // Vertical load (N)
-            .alpha = 0.1,         // Slip angle (tan(alpha) * sgn(Vcx))
+            .alpha = 0.1,         // Slip angle (radians)
             .kappa = 0.05,        // Longitudinal slip ratio
             .gamma = 0.0,         // Camber angle (radians)
             .Vcx = 10.0           // Contact patch center velocity in x direction (m/s)
@@ -49,7 +49,7 @@ int main() {
 The `TireInput` structure contains all input parameters for tire force evaluation:
 
 - `Fz` (double): Vertical load in Newtons (N)
-- `alpha` (double): Slip angle, defined as `tan(alpha) * sgn(Vcx)`
+- `alpha` (double): Slip angle in radians
 - `kappa` (double): Longitudinal slip ratio
 - `gamma` (double): Camber angle in radians
 - `Vcx` (double): Contact patch center velocity in x direction (m/s)

@@ -29,6 +29,8 @@ TireModel::TireModel(const std::string& filename)
 {
 }
 
+TireModel::~TireModel() = default;
+
 TireForces TireModel::evaluate(const TireInput& input) const {
     return model_->evaluate(input);
 }

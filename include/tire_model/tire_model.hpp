@@ -1,11 +1,13 @@
 #pragma once
 
 #include "tire_model/tire_types.hpp"
-#include "tire_model/internal/tire_model_base.hpp"
 #include <memory>
 #include <string>
 
 namespace tire_model {
+namespace internal {
+    class TireModelBase;
+}
 
 /**
  * @brief Main tire model class
@@ -15,6 +17,8 @@ namespace tire_model {
 class TireModel {
 public:
     explicit TireModel(const std::string& filename);
+    
+    ~TireModel();
 
     TireModel(const TireModel&) = delete;
     TireModel& operator=(const TireModel&) = delete;

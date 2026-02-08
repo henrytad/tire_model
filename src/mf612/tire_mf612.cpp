@@ -204,7 +204,7 @@ TireForces TireMF612::evaluate(const TireInput& input) const {
     // const double Vcx = 1.0; // Contact patch center velocity in x direction
     // const double VcPrime = Vc + epsilonV;
     // const double cos_alpha = Vcx / VcPrime;
-    const double cos_alpha = cos(alpha_star); // Assuming small angles, use above for large angles
+    const double cos_alpha = std::cos(alpha_star); // Assuming small angles, use above for large angles
 
     // 4.E7
     // TODO: Allow client to pass Vs and Vo if they want to model wet surfaces (friction decaying)
