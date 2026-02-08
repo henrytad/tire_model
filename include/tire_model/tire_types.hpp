@@ -6,11 +6,11 @@ namespace tire_model {
  * @brief Input structure for tire model evaluation
  */
 struct TireInput {
-    double Fz;         // Vertical load (N)
-    double alpha_star; // Slip angle (tan(alpha) * sgn(Vcx))
-    double kappa;      // Longitudinal slip ratio
-    double gamma;      // Camber angle (radians)
-    double Vcx;        // Contact patch center velocity in x direction (m/s)
+    double Fz;          // Vertical load (N)
+    double alpha;       // Slip angle (radians)
+    double kappa;       // Longitudinal slip ratio
+    double gamma;       // Camber angle (radians)
+    double Vcx;         // Contact patch center velocity in x direction (m/s)
 };
 
 /**

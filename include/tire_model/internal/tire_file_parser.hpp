@@ -10,11 +10,6 @@ namespace tire_model {
 namespace internal {
 
 /**
- * @brief Helper functions for parsing .tir parameter files (internal use only)
- */
-namespace tir_parser {
-
-/**
  * @brief Trim whitespace from the beginning and end of a string
  */
 std::string trim(const std::string& str);
@@ -56,8 +51,6 @@ double getDoubleFromMap(const std::map<std::string, std::string>& params, const 
  * @return String value from map or default value
  */
 std::string getStringFromMap(const std::map<std::string, std::string>& params, const std::string& key, const std::string& defaultValue = "");
-
-} // namespace tir_parser
 
 /**
  * @brief Parse a .tir file into a parameter map (internal use only)

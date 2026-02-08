@@ -1,6 +1,6 @@
 #include "tire_model/tire_model.hpp"
 #include "tire_model/internal/tire_model_base.hpp"
-#include "tire_model/internal/mf612/tire_mf612.hpp"
+#include "tire_model/internal/tire_mf612.hpp"
 #include "tire_model/internal/tire_file_parser.hpp"
 #include <stdexcept>
 #include <memory>

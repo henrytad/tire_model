@@ -144,31 +144,31 @@ struct MF612Params {
  * @brief MF6.1.2 scaling factors structure
  */
 struct MF612ScalingFactors {
-    double LFZO = 1.0;
-    double LMUX = 1.0;
-    double LMUY = 1.0;
-    double LXAL = 1.0;
-    double LMUV = 1.0;
-    double LKX = 1.0;
-    double LKY = 1.0;
-    double LCX = 1.0;
-    double LCY = 1.0;
-    double LEX = 1.0;
-    double LEY = 1.0;
-    double LHX = 1.0;
-    double LHY = 1.0;
-    double LVX = 1.0;
-    double LVY = 1.0;
-    double LKYC = 1.0;
-    double LKZC = 1.0;
-    double LTR = 1.0;
-    double LRES = 1.0;
-    double LYKA = 1.0;
-    double LVYKA = 1.0;
-    double LS = 1.0;
-    double LMX = 1.0;
-    double LVMX = 1.0;
-    double LMY = 1.0;
+    double LFZO = 0.0;
+    double LMUX = 0.0;
+    double LMUY = 0.0;
+    double LXAL = 0.0;
+    double LMUV = 0.0; // Should defualt to 0 unless trying to simulate slip speed with decaying friction
+    double LKX = 0.0;
+    double LKY = 0.0;
+    double LCX = 0.0;
+    double LCY = 0.0;
+    double LEX = 0.0;
+    double LEY = 0.0;
+    double LHX = 0.0;
+    double LHY = 0.0;
+    double LVX = 0.0;
+    double LVY = 0.0;
+    double LKYC = 0.0;
+    double LKZC = 0.0;
+    double LTR = 0.0;
+    double LRES = 0.0;
+    double LYKA = 0.0;
+    double LVYKA = 0.0;
+    double LS = 0.0;
+    double LMX = 0.0;
+    double LVMX = 0.0;
+    double LMY = 0.0;
 };
 
 /**

@@ -1,4 +1,4 @@
-#include "tire_model/internal/mf612/tire_mf612.hpp"
+#include "tire_model/internal/tire_mf612.hpp"
 #include "tire_model/internal/tire_file_parser.hpp"
 
 #include <cmath>
@@ -6,7 +6,6 @@
 
 using namespace tire_model;
 using namespace tire_model::internal;
-using namespace tire_model::internal::tir_parser;
 
 TireMF612::TireMF612(const std::map<std::string, std::string>& params)
     : t(MF612Params{
@@ -124,7 +123,7 @@ TireMF612::TireMF612(const std::map<std::string, std::string>& params)
             .LMUX = getDoubleFromMap(params, "LMUX", 1.0),
             .LMUY = getDoubleFromMap(params, "LMUY", 1.0),
             .LXAL = getDoubleFromMap(params, "LXAL", 1.0),
-            .LMUV = getDoubleFromMap(params, "LMUV", 1.0),
+            .LMUV = getDoubleFromMap(params, "LMUV", 0.0), // Should defualt to 0 unless trying to simulate slip speed with decaying friction
             .LKX = getDoubleFromMap(params, "LKX", 1.0),
             .LKY = getDoubleFromMap(params, "LKY", 1.0),
             .LCX = getDoubleFromMap(params, "LCX", 1.0),
@@ -158,10 +157,10 @@ inline double sgn(double x) {
     return (x > 0.0) - (x < 0.0);
 }
 
-// Assumes user passes in alpha_star (4.E3 ~ alpha_star = std::tan(alpha) * sgn(Vcx))
 TireForces TireMF612::evaluate(const TireInput& input) const {
     const double Fz = input.Fz;
-    const double alpha_star = input.alpha_star;
+    // Assumes user passes in alpha_star (4.E3 ~ alpha_star = std::tan(alpha) * sgn(Vcx))
+    const double alpha_star = input.alpha;
     const double kappa = input.kappa;
     const double gamma = input.gamma;
     const double Vcx = input.Vcx;
@@ -366,7 +365,7 @@ TireForces TireMF612::evaluate(const TireInput& input) const {
 
     // 4.E31
     // const double Mzo = MzoPrime + Mzro;
-    
+
     //
     // Longitudinal Force (Combined Slip)
     // 

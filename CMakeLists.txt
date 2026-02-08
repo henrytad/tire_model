@@ -51,3 +51,37 @@ add_custom_command(TARGET tire_model_example POST_BUILD
     ${CMAKE_BINARY_DIR}/sample.tir
     COMMENT "Copying sample.tir to build directory"
 )
+
+############################################################
+# Google Test
+############################################################
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
+
+include(GoogleTest)
+
+enable_testing()
+
+
+############################################################
+# Unit tests
+############################################################
+
+add_executable(tire_model_tests
+    tests/test_tire_mf612.cpp
+)
+
+target_link_libraries(tire_model_tests
+    PRIVATE
+        tire_model
+        GTest::gtest_main
+)
+
+gtest_discover_tests(tire_model_tests)

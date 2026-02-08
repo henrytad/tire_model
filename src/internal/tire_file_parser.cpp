@@ -7,7 +7,6 @@ using namespace tire_model::internal;
 
 namespace tire_model {
 namespace internal {
-namespace tir_parser {
 
 std::string trim(const std::string& str) {
     size_t first = str.find_first_not_of(" \t");
@@ -66,8 +65,6 @@ std::string getStringFromMap(const std::map<std::string, std::string>& params, c
     return defaultValue;
 }
 
-} // namespace tir_parser
-
 std::map<std::string, std::string> parseTirFile(const std::string& filename) {
     std::map<std::string, std::string> params;
     
@@ -78,14 +75,14 @@ std::map<std::string, std::string> parseTirFile(const std::string& filename) {
     
     std::string line;
     while (std::getline(file, line)) {
-        std::string trimmed = tir_parser::trim(line);
+        std::string trimmed = trim(line);
         // Skip empty lines and comments and section headers
         if (trimmed.empty() || trimmed[0] == '!' || trimmed[0] == '$' || trimmed[0] == '[') {
             continue;
         }
         
         // Parse parameter line (both string and numeric are stored as strings)
-        std::optional<std::pair<std::string, std::string>> result = tir_parser::parseParameterLineString(line);
+        std::optional<std::pair<std::string, std::string>> result = parseParameterLineString(line);
         if (result) {
             const auto& [name, val] = *result;
             params[name] = val;
