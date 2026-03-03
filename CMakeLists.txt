@@ -39,9 +39,11 @@ target_include_directories(tire_model
 
 target_compile_features(tire_model PUBLIC cxx_std_20)
 
-set_target_properties(tire_model PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
-)
+if(_is_top_level)
+    set_target_properties(tire_model PROPERTIES
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+    )
+endif()
 
 ############################################################
 # Example executable
@@ -61,8 +63,8 @@ if(TIRE_MODEL_BUILD_EXAMPLES)
     add_custom_command(TARGET tire_model_example POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_if_different
             ${CMAKE_CURRENT_SOURCE_DIR}/examples/sample.tir
-            ${CMAKE_BINARY_DIR}/sample.tir
-        COMMENT "Copying sample.tir to build directory"
+            $<TARGET_FILE_DIR:tire_model_example>/sample.tir
+        COMMENT "Copying sample.tir to executable directory"
     )
 
 endif()
