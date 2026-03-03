@@ -80,3 +80,16 @@ The main class for client use. Automatically handles model selection internally.
   - Returns a `TireForces` structure with `Fx`, `Fy`, and `Mz`
 
 **Note:** The `TireModel` class is non-copyable (copy constructor and assignment operator are deleted).
+
+## Development
+
+**Build** (from repo root):
+
+```bash
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release
+```
+
+**Run example:** from `build/`, run `./tire_model_example` (or `tire_model_example.exe` on Windows).
+
+**Run tests:** from repo root, `ctest --test-dir build -C Release` (or `cd build && ctest -C Release`).
