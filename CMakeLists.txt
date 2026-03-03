@@ -10,7 +10,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # Options
 ############################################################
 
-# BUILD_TESTING is a standard CTest variable; default ON only when top-level
+# Default to building tests/examples only when this is the top-level project.
+# Consumers via FetchContent/add_subdirectory get only the library.
 if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
     set(_is_top_level ON)
 else()
