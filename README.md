@@ -2,6 +2,19 @@
 
 A C++ static library for tire force and moment calculations using various tire models. Currently implements the Magic Formula 6.1.2 (MF6.1.2) tire model, with support for additional models planned.
 
+## Development
+
+**Build** (from repo root):
+
+```bash
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --config Release
+```
+
+**Run example:** from `build/`, run `./tire_model_example` (or `tire_model_example.exe` on Windows).
+
+**Run tests:** from repo root, `ctest --test-dir build -C Release` (or `cd build && ctest -C Release`).
+
 ## Usage
 
 ### Basic Usage
