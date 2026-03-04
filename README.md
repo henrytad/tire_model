@@ -87,12 +87,16 @@ The main class for client use. Automatically handles model selection internally.
 ```cpp
 // Numeric parameter
 if (auto p = tire.getParam("VERTICAL_STIFFNESS")) {
-    double stiffness = std::get<double>(*p); // 209651.0
+    if (std::holds_alternative<double>(*p)) {
+        double stiffness = std::get<double>(*p); // 209651.0
+    }
 }
 
 // String parameter
 if (auto p = tire.getParam("LENGTH")) {
-    std::string unit = std::get<std::string>(*p); // "meter"
+    if (std::holds_alternative<std::string>(*p)) {
+        std::string unit = std::get<std::string>(*p); // "meter"
+    }
 }
 ```
 

@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <map>
 #include <optional>
+#include <utility>
 #include <variant>
 
 using namespace tire_model;

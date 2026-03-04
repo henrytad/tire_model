@@ -13,10 +13,14 @@ int main() {
         // std::variant<double, std::string> — numeric values come back as
         // double, unit/label strings come back as std::string.
         if (auto p = tire.getParam("VERTICAL_STIFFNESS")) {
-            std::cout << "Vertical stiffness: " << std::get<double>(*p) << " N/m" << std::endl;
+            if (auto value = std::get_if<double>(&*p)) {
+                std::cout << "Vertical stiffness: " << *value << " N/m" << std::endl;
+            }
         }
         if (auto p = tire.getParam("LENGTH")) {
-            std::cout << "Length unit: " << std::get<std::string>(*p) << std::endl;
+            if (auto value = std::get_if<std::string>(&*p)) {
+                std::cout << "Length unit: " << *value << std::endl;
+            }
         }
 
         // Evaluate tire forces and moments
