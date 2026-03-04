@@ -109,6 +109,8 @@ if(TIRE_MODEL_BUILD_TESTS)
         COMMENT "Copying sample.tir to test directory"
     )
 
-    gtest_discover_tests(tire_model_tests)
+    gtest_discover_tests(tire_model_tests
+        WORKING_DIRECTORY $<TARGET_FILE_DIR:tire_model_tests>
+    )
 
 endif()
