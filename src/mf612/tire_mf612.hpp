@@ -1,11 +1,10 @@
 #pragma once
 
-#include "tire_model/internal/tire_model_base.hpp"
+#include "tire_model_base.hpp"
 #include <string>
 #include <map>
 
 namespace tire_model {
-namespace internal {
 
 /**
  * @brief MF6.1.2 tire model parameters structure
@@ -200,6 +199,5 @@ private:
     MF612ScalingFactors lambda; // Scaling factors
 };
 
-} // namespace internal
 } // namespace tire_model
 

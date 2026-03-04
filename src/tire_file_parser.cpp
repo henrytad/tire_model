@@ -1,14 +1,11 @@
-#include "tire_model/internal/tire_file_parser.hpp"
+#include "tire_file_parser.hpp"
 #include <fstream>
 #include <stdexcept>
 #include <map>
 #include <cctype>
 #include <algorithm>
 
-using namespace tire_model::internal;
-
 namespace tire_model {
-namespace internal {
 
 std::string trim(const std::string& str) {
     // Find first non-whitespace character (handles space, tab, \r, \n, etc.)
@@ -117,5 +114,4 @@ TireModelType detectModelType(const std::map<std::string, std::string>& params) 
     throw std::runtime_error("Could not determine tire model type from parameter file. Expected FITTYP = 61 (MF6.1). Only MF6.1 is currently supported.");
 }
 
-} // namespace internal
 } // namespace tire_model

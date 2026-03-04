@@ -1,11 +1,10 @@
-#include "tire_model/internal/tire_mf612.hpp"
-#include "tire_model/internal/tire_file_parser.hpp"
+#include "mf612/tire_mf612.hpp"
+#include "tire_file_parser.hpp"
 
 #include <cmath>
 #include <numbers>
 
 using namespace tire_model;
-using namespace tire_model::internal;
 
 TireMF612::TireMF612(const std::map<std::string, std::string>& params)
     : t(MF612Params{
