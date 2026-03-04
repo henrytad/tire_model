@@ -2,10 +2,6 @@ cmake_minimum_required(VERSION 3.15)
 
 project(tire_model VERSION 1.0.0 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 ############################################################
 # Options
 ############################################################
@@ -27,7 +23,7 @@ option(TIRE_MODEL_BUILD_EXAMPLES "Build example programs"  ${_is_top_level})
 
 add_library(tire_model STATIC
     src/mf612/tire_mf612.cpp
-    src/internal/tire_file_parser.cpp
+    src/tire_file_parser.cpp
     src/tire_model.cpp
 )
 
@@ -35,9 +31,11 @@ target_include_directories(tire_model
     PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
+    PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
-target_compile_features(tire_model PUBLIC cxx_std_20)
+target_compile_features(tire_model PRIVATE cxx_std_20)
 
 if(_is_top_level)
     set_target_properties(tire_model PROPERTIES
@@ -89,6 +87,11 @@ if(TIRE_MODEL_BUILD_TESTS)
 
     add_executable(tire_model_tests
         tests/test_tire_mf612.cpp
+    )
+
+    target_include_directories(tire_model_tests
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/src
     )
 
     target_link_libraries(tire_model_tests

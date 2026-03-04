@@ -1,9 +1,8 @@
 #include <gtest/gtest.h>
-#include "tire_model/internal/tire_mf612.hpp"
+#include "mf612/tire_mf612.hpp"
 #include <cmath>
 
 using namespace tire_model;
-using namespace tire_model::internal;
 
 TEST(TireMF612EvaluateTest, BasicEvaluation) {
     // Create tire model parameters from sample.tir

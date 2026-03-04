@@ -1,13 +1,12 @@
 #pragma once
 
-#include "tire_model/internal/tire_model_base.hpp"
+#include "tire_model_base.hpp"
 #include <string>
 #include <optional>
 #include <utility>
 #include <map>
 
 namespace tire_model {
-namespace internal {
 
 /**
  * @brief Trim whitespace from the beginning and end of a string
@@ -69,5 +68,4 @@ std::map<std::string, std::string> parseTirFile(const std::string& filename);
  */
 TireModelType detectModelType(const std::map<std::string, std::string>& params);
 
-} // namespace internal
 } // namespace tire_model
