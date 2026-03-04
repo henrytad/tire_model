@@ -2,6 +2,7 @@
 
 #include "tire_model/tire_types.hpp"
 #include <memory>
+#include <optional>
 #include <string>
 
 namespace tire_model {
@@ -23,6 +24,11 @@ public:
     TireModel& operator=(TireModel&&) noexcept;
 
     TireForces evaluate(const TireInput& input) const;
+
+    /// Look up any raw parameter from the .tir file by key (e.g. "VERTICAL_STIFFNESS", "LENGTH").
+    /// Returns nullopt if the key is not present.
+    /// Numeric values are returned as double; text values as std::string.
+    std::optional<TireParam> getParam(const std::string& key) const;
 
 private:
     struct ModelVariant;

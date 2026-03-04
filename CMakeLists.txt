@@ -24,6 +24,7 @@ option(TIRE_MODEL_BUILD_EXAMPLES "Build example programs"  ${_is_top_level})
 add_library(tire_model STATIC
     src/mf612/tire_mf612.cpp
     src/tire_file_parser.cpp
+    src/tire_model_base.cpp
     src/tire_model.cpp
 )
 
@@ -87,6 +88,7 @@ if(TIRE_MODEL_BUILD_TESTS)
 
     add_executable(tire_model_tests
         tests/test_tire_mf612.cpp
+        tests/test_tire_model.cpp
     )
 
     target_include_directories(tire_model_tests
@@ -98,6 +100,13 @@ if(TIRE_MODEL_BUILD_TESTS)
         PRIVATE
             tire_model
             GTest::gtest_main
+    )
+
+    add_custom_command(TARGET tire_model_tests POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            ${CMAKE_CURRENT_SOURCE_DIR}/examples/sample.tir
+            $<TARGET_FILE_DIR:tire_model_tests>/sample.tir
+        COMMENT "Copying sample.tir to test directory"
     )
 
     gtest_discover_tests(tire_model_tests)

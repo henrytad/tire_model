@@ -3,6 +3,7 @@
 #include "mf612/tire_mf612.hpp"
 #include <stdexcept>
 #include <map>
+#include <optional>
 #include <variant>
 
 using namespace tire_model;
@@ -17,7 +18,7 @@ namespace {
         TireModelType type = detectModelType(params);
         switch (type) {
             case TireModelType::MF612:
-                return TireMF612(params);
+                return TireMF612(std::move(params));
             default:
                 throw std::runtime_error("Unsupported tire model type");
         }
@@ -48,4 +49,8 @@ TireModel& TireModel::operator=(TireModel&&) noexcept = default;
 
 TireForces TireModel::evaluate(const TireInput& input) const {
     return std::visit([&input](const auto& m) { return m.evaluate(input); }, impl_->model);
+}
+
+std::optional<TireParam> TireModel::getParam(const std::string& key) const {
+    return std::visit([&key](const auto& m) { return m.getParam(key); }, impl_->model);
 }
