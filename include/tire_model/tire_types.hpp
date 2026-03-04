@@ -1,6 +1,13 @@
 #pragma once
 
+#include <string>
+#include <variant>
+
 namespace tire_model {
+
+// Value type returned by TireModel::getParam().
+// Holds either a numeric value (double) or a text value (std::string).
+using TireParam = std::variant<double, std::string>;
 
 /**
  * @brief Input structure for tire model evaluation

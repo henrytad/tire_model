@@ -1,8 +1,8 @@
 #pragma once
 
 #include "tire_model_base.hpp"
-#include <string>
 #include <map>
+#include <string>
 
 namespace tire_model {
 
@@ -179,14 +179,14 @@ class TireMF612 : public TireModelBase {
 public:
     /**
      * @brief Construct a TireMF612 model from a parameter map
-     * 
+     *
      * @param params Map of parameter names to string values
      */
-    explicit TireMF612(const std::map<std::string, std::string>& params);
+    explicit TireMF612(std::map<std::string, std::string> params);
 
     /**
      * @brief Construct a TireMF612 model from parameter structures
-     * 
+     *
      * @param params Tire parameters
      * @param scalingFactors Scaling factors
      */

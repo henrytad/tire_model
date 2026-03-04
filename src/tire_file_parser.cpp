@@ -13,7 +13,7 @@ std::string trim(const std::string& str) {
         return !std::isspace(ch);
     });
     if (first == str.end()) return "";
-    
+
     // Find last non-whitespace character
     auto last = std::find_if(str.rbegin(), str.rend(), [](unsigned char ch) {
         return !std::isspace(ch);

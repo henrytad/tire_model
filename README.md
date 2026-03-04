@@ -78,8 +78,27 @@ The main class for client use. Automatically handles model selection internally.
 - `TireForces evaluate(const TireInput& input) const`
   - Evaluates tire forces and moments for the given input conditions
   - Returns a `TireForces` structure with `Fx`, `Fy`, and `Mz`
+- `std::optional<TireParam> getParam(const std::string& key) const`
+  - Looks up any raw parameter from the .tir file by key (e.g. `"VERTICAL_STIFFNESS"`, `"LENGTH"`, `"LCX"`)
+  - Returns `std::nullopt` if the key is not present in the file
+  - Numeric values are returned as `double`; text values (unit strings, labels) as `std::string`
+  - `TireParam` is `std::variant<double, std::string>`
 
-**Note:** The `TireModel` class is non-copyable (copy constructor and assignment operator are deleted).
+```cpp
+// Numeric parameter
+if (auto p = tire.getParam("VERTICAL_STIFFNESS")) {
+    if (std::holds_alternative<double>(*p)) {
+        double stiffness = std::get<double>(*p); // 209651.0
+    }
+}
+
+// String parameter
+if (auto p = tire.getParam("LENGTH")) {
+    if (std::holds_alternative<std::string>(*p)) {
+        std::string unit = std::get<std::string>(*p); // "meter"
+    }
+}
+```
 
 ## Development
 
