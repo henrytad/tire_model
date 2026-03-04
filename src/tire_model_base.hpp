@@ -24,15 +24,15 @@ public:
 
     virtual TireForces evaluate(const TireInput& input) const = 0;
 
-    /// Looks up any raw parameter from the .tir file by key.
-    /// Returns nullopt if the key is absent; double if numeric, string otherwise.
+    // Looks up any raw parameter from the .tir file by key.
+    // Returns nullopt if the key is absent; double if numeric, string otherwise.
     std::optional<TireParam> getParam(const std::string& key) const;
 
 protected:
     TireModelBase() = default;
     explicit TireModelBase(std::map<std::string, std::string> rawParams);
 
-    /// Read-only access to the raw .tir file parameters for use in subclass constructors.
+    // Read-only access to the raw .tir file parameters for use in subclass constructors.
     const std::map<std::string, std::string>& rawParams() const { return rawParams_; }
 
 private:
