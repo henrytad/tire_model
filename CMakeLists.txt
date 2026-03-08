@@ -23,6 +23,7 @@ option(TIRE_MODEL_BUILD_EXAMPLES "Build example programs"  ${_is_top_level})
 
 add_library(tire_model STATIC
     src/mf612/tire_mf612.cpp
+    src/pac2002/tire_pac2002.cpp
     src/tire_file_parser.cpp
     src/tire_model_base.cpp
     src/tire_model.cpp
@@ -88,6 +89,7 @@ if(TIRE_MODEL_BUILD_TESTS)
 
     add_executable(tire_model_tests
         tests/test_tire_mf612.cpp
+        tests/test_tire_pac2002.cpp
         tests/test_tire_model.cpp
     )
 

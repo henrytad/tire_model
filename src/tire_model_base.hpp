@@ -11,8 +11,8 @@ namespace tire_model {
  * @brief Enumeration of supported tire model types
  */
 enum class TireModelType {
-    MF612,  // Magic Formula 6.1.2
-    // Future models can be added here
+    MF612,   // Magic Formula 6.1.2
+    PAC2002, // PAC2002 (Pacejka 2002)
 };
 
 /**

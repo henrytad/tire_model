@@ -1,6 +1,7 @@
 #include "tire_model/tire_model.hpp"
 #include "tire_file_parser.hpp"
 #include "mf612/tire_mf612.hpp"
+#include "pac2002/tire_pac2002.hpp"
 #include <stdexcept>
 #include <map>
 #include <optional>
@@ -10,16 +11,18 @@
 using namespace tire_model;
 
 struct TireModel::ModelVariant {
-    std::variant<TireMF612> model;
+    std::variant<TireMF612, TirePAC2002> model;
 };
 
 namespace {
-    std::variant<TireMF612> makeModel(const std::string& filename) {
+    std::variant<TireMF612, TirePAC2002> makeModel(const std::string& filename) {
         std::map<std::string, std::string> params = parseTirFile(filename);
         TireModelType type = detectModelType(params);
         switch (type) {
             case TireModelType::MF612:
                 return TireMF612(std::move(params));
+            case TireModelType::PAC2002:
+                return TirePAC2002(std::move(params));
             default:
                 throw std::runtime_error("Unsupported tire model type");
         }
