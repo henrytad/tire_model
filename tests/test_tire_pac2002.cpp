@@ -49,7 +49,7 @@ TEST(TirePAC2002EvaluateTest, BasicEvaluation) {
     params.PKY1 = -15.324;
     params.PKY2 = 1.715;
     params.PKY3 = 0.3695;
-    params.PKY4 = 2.0005;
+    params.PKY4 = 2.0; // Default to 2.0 from (4.E25)
     params.PKY5 = 0.0;
     params.PKY6 = -0.8987;
     params.PKY7 = -0.23303;
@@ -145,6 +145,6 @@ TEST(TirePAC2002EvaluateTest, BasicEvaluation) {
 
     // Expected values from this param set
     EXPECT_FLOAT_EQ(forces.Fx, 3902.7764f);
-    EXPECT_FLOAT_EQ(forces.Fy, -2522.8809f);
-    EXPECT_FLOAT_EQ(forces.Mz, -14.740993f);
+    EXPECT_FLOAT_EQ(forces.Fy, -2522.6082f);
+    EXPECT_FLOAT_EQ(forces.Mz, -14.742677f);
 }
