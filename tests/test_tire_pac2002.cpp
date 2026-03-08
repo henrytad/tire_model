@@ -1,25 +1,21 @@
 #include <gtest/gtest.h>
-#include "mf612/tire_mf612.hpp"
+#include "pac2002/tire_pac2002.hpp"
 #include <cmath>
 
 using namespace tire_model;
 
-TEST(TireMF612EvaluateTest, BasicEvaluation) {
-    // Create tire model parameters from sample.tir
-    MF612Params params{};
+TEST(TirePAC2002EvaluateTest, BasicEvaluation) {
+    PAC2002Params params{};
     params.LENGTH = "meter";
     params.FORCE = "Newton";
     params.UNLOADED_RADIUS = 0.3135;
-    params.INFLPRES = 200000.0;
-    params.NOMPRES = 200000.0;
     params.FNOMIN = 4000.0;
-    params.VERTICAL_STIFFNESS = 209651.0;
-    
-    // Longitudinal force parameters
+    params.VERTICAL_STIFFNESS = 209651.0; 
+
+    // Longitudinal
     params.PCX1 = 1.579;
     params.PDX1 = 1.0422;
     params.PDX2 = -0.08285;
-    params.PDX3 = 0.0;
     params.PEX1 = 0.11113;
     params.PEX2 = 0.3143;
     params.PEX3 = -0.0;
@@ -31,10 +27,7 @@ TEST(TireMF612EvaluateTest, BasicEvaluation) {
     params.PHX2 = 0.0011598;
     params.PVX1 = 2.20283e-5;
     params.PVX2 = 1.0568e-4;
-    params.PPX1 = -0.3485;
-    params.PPX2 = 0.37824;
-    params.PPX3 = -0.09603;
-    params.PPX4 = 0.06518;
+
     params.RBX1 = 13.046;
     params.RBX2 = 9.718;
     params.RBX3 = 0.0;
@@ -42,8 +35,8 @@ TEST(TireMF612EvaluateTest, BasicEvaluation) {
     params.REX1 = -0.4403;
     params.REX2 = -0.4663;
     params.RHX1 = -9.968e-5;
-    
-    // Lateral force parameters
+
+    // Lateral
     params.PCY1 = 1.337;
     params.PDY1 = 0.8785;
     params.PDY2 = -0.06452;
@@ -66,11 +59,7 @@ TEST(TireMF612EvaluateTest, BasicEvaluation) {
     params.PVY2 = 0.03592;
     params.PVY3 = -0.162;
     params.PVY4 = -0.4864;
-    params.PPY1 = -0.6255;
-    params.PPY2 = -0.06523;
-    params.PPY3 = -0.16666;
-    params.PPY4 = -0.2811;
-    params.PPY5 = 0.0;
+
     params.RBY1 = 10.622;
     params.RBY2 = 7.82;
     params.RBY3 = 0.002037;
@@ -86,13 +75,13 @@ TEST(TireMF612EvaluateTest, BasicEvaluation) {
     params.RVY4 = 94.63;
     params.RVY5 = 1.8914;
     params.RVY6 = 23.8;
-    
-    // Aligning moment parameters
+
+    // Aligning
     params.QBZ1 = 12.035;
     params.QBZ2 = -1.33;
     params.QBZ3 = 0.0;
-    params.QBZ4 = 0.176;
     params.QBZ5 = -0.14853;
+    params.QBZ6 = 0.0;
     params.QBZ9 = 34.5;
     params.QBZ10 = 0.0;
     params.QCZ1 = 1.2923;
@@ -115,14 +104,12 @@ TEST(TireMF612EvaluateTest, BasicEvaluation) {
     params.QHZ2 = 0.0024087;
     params.QHZ3 = 0.24973;
     params.QHZ4 = -0.21205;
-    params.PPZ1 = -0.4408;
-    params.PPZ2 = 0.0;
     params.SSZ1 = 0.00918;
     params.SSZ2 = 0.03869;
     params.SSZ3 = 0.0;
     params.SSZ4 = 0.0;
-    
-    MF612ScalingFactors scalingFactors{};
+
+    PAC2002ScalingFactors scalingFactors{};
     scalingFactors.LFZO = 1.0;
     scalingFactors.LCX = 1.0;
     scalingFactors.LMUX = 1.28;
@@ -144,23 +131,20 @@ TEST(TireMF612EvaluateTest, BasicEvaluation) {
     scalingFactors.LYKA = 1.08;
     scalingFactors.LVYKA = 1.0;
     scalingFactors.LS = 1.0;
-    scalingFactors.LMX = 1.0;
-    scalingFactors.LVMX = 1.0;
-    scalingFactors.LMY = 1.0;
 
-    TireMF612 tire(params, scalingFactors);
-    
+    TirePAC2002 tire(params, scalingFactors);
+
     TireInput input{};
     input.Fz = 4000.0;
     input.alpha = 0.05;
     input.kappa = 0.06;
     input.gamma = 0.07;
     input.Vcx = 1.0;
-    
-    TireForces forces = tire.evaluate(input);
-    
-    EXPECT_FLOAT_EQ(forces.Fx, 3902.7354);
-    EXPECT_FLOAT_EQ(forces.Fy, -2511.1272);
-    EXPECT_FLOAT_EQ(forces.Mz, -15.647495);
-}
 
+    TireForces forces = tire.evaluate(input);
+
+    // Expected values from this param set
+    EXPECT_FLOAT_EQ(forces.Fx, 3902.7764f);
+    EXPECT_FLOAT_EQ(forces.Fy, -2522.8809f);
+    EXPECT_FLOAT_EQ(forces.Mz, -14.740993f);
+}

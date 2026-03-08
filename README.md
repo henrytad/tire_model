@@ -1,6 +1,6 @@
 # Tire Model Library
 
-A C++ static library for tire force and moment calculations using various tire models. Currently implements the Magic Formula 6.1.2 (MF6.1.2) tire model, with support for additional models planned.
+A C++ static library for tire force and moment calculations using various tire models. Currently implements the Magic Formula 6.1.2 (MF6.1.2) and PAC2002 tire models, with support for additional models planned.
 
 ## Usage
 

@@ -100,18 +100,24 @@ std::map<std::string, std::string> parseTirFile(const std::string& filename) {
 }
 
 TireModelType detectModelType(const std::map<std::string, std::string>& params) {
+    auto propFormatIt = params.find("PROPERTY_FILE_FORMAT");
+    if (propFormatIt != params.end()) {
+        const std::string& format = propFormatIt->second;
+        if (format == "PAC2002") {
+            return TireModelType::PAC2002;
+        }
+    }
+
     auto fitTypIt = params.find("FITTYP");
     if (fitTypIt != params.end()) {
         const std::string& fitTypStr = fitTypIt->second;
         if (fitTypStr == "61") {
             return TireModelType::MF612;
         }
-        // Found FITTYP but it's not 61
         throw std::runtime_error("Unsupported tire model type detected: FITTYP = " + fitTypStr + ". Only FITTYP = 61 (MF6.1) is currently supported.");
     }
-    
-    // No model type found in file
-    throw std::runtime_error("Could not determine tire model type from parameter file. Expected FITTYP = 61 (MF6.1). Only MF6.1 is currently supported.");
+
+    throw std::runtime_error("Could not determine tire model type from parameter file. Expected PROPERTY_FILE_FORMAT = 'PAC2002' or FITTYP = 61 (MF6.1).");
 }
 
 } // namespace tire_model
