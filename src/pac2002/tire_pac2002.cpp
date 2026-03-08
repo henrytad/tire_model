@@ -55,7 +55,7 @@ TirePAC2002::TirePAC2002(std::map<std::string, std::string> params)
             .PKY1 = getDoubleFromMap(rawParams(), "PKY1"),
             .PKY2 = getDoubleFromMap(rawParams(), "PKY2"),
             .PKY3 = getDoubleFromMap(rawParams(), "PKY3"),
-            .PKY4 = getDoubleFromMap(rawParams(), "PKY4"),
+            .PKY4 = getDoubleFromMap(rawParams(), "PKY4", 2.0), // Default to 2.0 from (4.E25)
             .PKY5 = getDoubleFromMap(rawParams(), "PKY5"),
             .PKY6 = getDoubleFromMap(rawParams(), "PKY6"),
             .PKY7 = getDoubleFromMap(rawParams(), "PKY7"),
